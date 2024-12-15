@@ -1,101 +1,160 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { useBool } from "../hooks/useBool";
+import MainTable from "../components/main/mainTable";
+import Button from "../components/reuseable/button";
+import { JobRecord, JobStatus } from "../models/jobModels";
+import JobModal from "../components/main/jobModal";
+
+const HomePage = () => {
+  let jobRecords: JobRecord[] = [];
+  const modalState = useBool(false);
+
+  // Data fetching process
+  // const getJobRecords = () => {}
+
+  // Dummy data
+  jobRecords = [
+    {
+      id: 1,
+      title: "Software Engineer asd asd asd asdasd as sad sad",
+      company: "Google asdsa asd as asd sa sa sadsadas",
+      status: JobStatus.applied,
+      location: "Mountain View, CA",
+    },
+    {
+      id: 2,
+      title: "Product Manager",
+      company: "Facebook",
+      status: JobStatus.interview,
+      location: "Menlo Park, CA",
+    },
+    {
+      id: 3,
+      title: "Data Analyst",
+      company: "Amazon",
+      status: JobStatus.offer,
+      location: "Seattle, WA",
+    },
+    {
+      id: 4,
+      title: "Software Engineer",
+      company: "Microsoft",
+      status: JobStatus.rejected,
+      location: "Redmond, WA",
+    },
+
+    {
+      id: 5,
+      title: "Software Engineer",
+      company: "Google",
+      status: JobStatus.applied,
+      location: "Mountain View, CA",
+    },
+    {
+      id: 6,
+      title: "Product Manager",
+      company: "Facebook",
+      status: JobStatus.interview,
+      location: "Menlo Park, CA",
+    },
+    {
+      id: 7,
+      title: "Data Analyst",
+      company: "Amazon",
+      status: JobStatus.offer,
+      location: "Seattle, WA",
+    },
+    {
+      id: 8,
+      title: "Software Engineer",
+      company: "Microsoft",
+      status: JobStatus.rejected,
+      location: "Redmond, WA",
+    },
+
+    {
+      id: 9,
+      title: "Software Engineer",
+      company: "Google",
+      status: JobStatus.applied,
+      location: "Mountain View, CA",
+    },
+    {
+      id: 10,
+      title: "Product Manager",
+      company: "Facebook",
+      status: JobStatus.interview,
+      location: "Menlo Park, CA",
+    },
+    {
+      id: 11,
+      title: "Data Analyst",
+      company: "Amazon",
+      status: JobStatus.offer,
+      location: "Seattle, WA",
+    },
+    {
+      id: 12,
+      title: "Software Engineer",
+      company: "Microsoft",
+      status: JobStatus.rejected,
+      location: "Redmond, WA",
+    },
+
+    {
+      id: 13,
+      title: "Software Engineer",
+      company: "Google",
+      status: JobStatus.applied,
+      location: "Mountain View, CA",
+    },
+    {
+      id: 14,
+      title: "Product Manager",
+      company: "Facebook",
+      status: JobStatus.interview,
+      location: "Menlo Park, CA",
+    },
+    {
+      id: 15,
+      title: "Data Analyst",
+      company: "Amazon",
+      status: JobStatus.offer,
+      location: "Seattle, WA",
+    },
+    {
+      id: 16,
+      title: "Software Engineer",
+      company: "Microsoft",
+      status: JobStatus.rejected,
+      location: "Redmond, WA",
+    },
+  ];
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
+    <div className="md:px-6 lg:px-20">
+      <div className="mr-6 flex justify-end">
+        <Button
+          text="Add record"
+          onClick={() => {
+            modalState.set(true);
+          }}
+          color="primary"
         />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+      </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      <MainTable jobRecords={jobRecords} />
+
+      {modalState.val && (
+        <JobModal
+          isOpen={modalState.val}
+          setHide={() => modalState.set(false)}
+          // job={jobRecords[2]}
+        />
+      )}
     </div>
   );
-}
+};
+
+export default HomePage;
